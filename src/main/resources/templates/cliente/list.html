@@ -22,17 +22,14 @@
 					<thead>
 						<tr>
 							<th><i class="fas fa-info-circle"></i>&nbsp;Nombre</th>
-							
-
 							<th><a class="btn btn-sm btn-success" th:href="@{/cliente/create}" >
 								<i class="fas fa-plus"></i>&nbsp;Nuevo</a>
 							</th>
 						</tr>
 					</thead>
 					<tbody>						
-						<tr th:each="cliente : ${cliente}" >
+						<tr th:each="cliente : ${list}" >
 							<td th:text="${cliente.nombre}"></td>
-							
 							<td>
 								<div class="row">
 									<a class="btn btn-sm btn-warning" title="Editar"

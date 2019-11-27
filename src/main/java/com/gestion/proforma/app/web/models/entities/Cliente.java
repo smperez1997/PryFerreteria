@@ -79,7 +79,14 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente",fetch= FetchType.LAZY)
 	private List<Proforma>proforma;
 	 
-	
+	public Cliente() {
+		super();
+	}
+
+	public Cliente(Integer id) {
+		super();
+		this.id = id;
+	}
 	public List<Proforma> getProforma() {
 		return proforma;
 	}

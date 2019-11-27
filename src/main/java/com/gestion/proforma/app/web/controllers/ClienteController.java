@@ -42,6 +42,8 @@ public class ClienteController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Cliente cliente = service.findById(id);
+		model.addAttribute("title", "Actualizando el registro de " 
+				+ cliente.getNombre());
 		model.addAttribute("cliente",cliente);
 		return "cliente/form";
 	}
@@ -59,9 +61,10 @@ public class ClienteController {
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<Cliente> list = service.findAll();
-		model.addAttribute("list",list);
+		
 		model.addAttribute("title","Listado de clientes");
-		return "/cliente/list";
+		model.addAttribute("list",list);
+		return "cliente/list";
 	}
 	
 	  @PostMapping(value="/save")
