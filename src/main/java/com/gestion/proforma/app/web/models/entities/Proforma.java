@@ -68,7 +68,7 @@ public class Proforma implements Serializable {
 	
 	//relacion 1..n con detalle de proforma
 	@OneToMany(mappedBy = "proforma", fetch = FetchType.LAZY)
-	private List<DetalleProforma> detalles;//detalles q contienen este elemento del catalogo
+	private List<DetalleFactura> detalles;//detalles q contienen este elemento del catalogo
 
 		
 	
@@ -135,10 +135,10 @@ public class Proforma implements Serializable {
 	public void setTotal(Float total) {
 		this.total = total;
 	}
-	public List<DetalleProforma> getDetalles() {
+	public List<DetalleFactura> getDetalles() {
 		return detalles;
 	}
-	public void setDetalles(List<DetalleProforma> detalles) {
+	public void setDetalles(List<DetalleFactura> detalles) {
 		this.detalles = detalles;
 	}
 	

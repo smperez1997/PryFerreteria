@@ -9,37 +9,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gestion.proforma.app.web.models.entities.DetalleProforma;
-import com.gestion.proforma.app.web.models.service.IDetalleProformaService;
+import com.gestion.proforma.app.web.models.entities.DetalleFactura;
+import com.gestion.proforma.app.web.models.service.IDetalleFacturaService;
  
 
 @Controller
-@RequestMapping(value="/detalleproforma")
-public class DetalleProformaController {
+@RequestMapping(value="/detallefactura")
+public class DetalleFacturaController {
 
 	@Autowired
-	private IDetalleProformaService service;
+	private IDetalleFacturaService service;
 	
 	@GetMapping(value="/create")
 	public String create(Model model) {
-		DetalleProforma detalleproforma = new DetalleProforma();
-		model.addAttribute("detalleproforma",detalleproforma);
+		DetalleFactura detalleproforma = new DetalleFactura();
+		model.addAttribute("detallefactura",detalleproforma);
 		model.addAttribute("title","Registro del nuevo detalle de proforma");
-		return "detalleproforma/form";
+		return "detallefactura/form";
 	}
 	
 	@GetMapping(value="/retrive/{id}")
 	public String retrive(@PathVariable(value="id") Integer id, Model model) {
-		DetalleProforma detalleproforma = service.findById(id);
-		model.addAttribute("detalleproforma",detalleproforma);
-		return "detalleproforma/card";
+		DetalleFactura detallefactura = service.findById(id);
+		model.addAttribute("detalleproforma",detallefactura);
+		return "detallefactura/card";
 	}
 	
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
-		DetalleProforma detalleproforma = service.findById(id);
+		DetalleFactura detalleproforma = service.findById(id);
 		model.addAttribute("detalleproforma",detalleproforma);
 		return "detalleproforma/form";
 	}
@@ -56,7 +57,7 @@ public class DetalleProformaController {
 	}
 	@GetMapping(value="/list")
 	public String list(Model model) {
-		List<DetalleProforma> list = service.findAll();
+		List<DetalleFactura> list = service.findAll();
 		model.addAttribute("list",list);
 		model.addAttribute("title","Listado de tipos de detalle de proforma");
 		return "/detalleproforma/list";
@@ -64,7 +65,7 @@ public class DetalleProformaController {
 	
 	//
 	@PostMapping(value="/save")
-	public String save(DetalleProforma detalleproforma,Model model, RedirectAttributes redirect) {	
+	public String save(DetalleFactura detalleproforma,Model model, RedirectAttributes redirect) {	
 		try {
 			service.save(detalleproforma);
 			redirect.addFlashAttribute("success","Registro guardado");

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="DETALLEPROFORMA")
-public class DetalleProforma implements Serializable {
+public class DetalleFactura implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +38,10 @@ public class DetalleProforma implements Serializable {
 	@ManyToOne
 	private Proforma proforma;
 	
-	public DetalleProforma() {
+	public DetalleFactura() {
 		super();
 	}
-	public DetalleProforma(Integer id) {
+	public DetalleFactura(Integer id) {
 		super();
 		this.iddetalleproforma=id;
 	}

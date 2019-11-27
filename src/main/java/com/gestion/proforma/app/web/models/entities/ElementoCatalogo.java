@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import com.gestion.proforma.app.web.models.entities.DetalleProforma;
+import com.gestion.proforma.app.web.models.entities.DetalleFactura;
 
 @Entity
 @Table(name="ELEMENTOCATALOGO")
@@ -41,7 +41,7 @@ public class ElementoCatalogo implements Serializable {
 	
 	//relacion 0..n con detalle de proforma
 	@OneToMany(mappedBy = "elementocatalogo", fetch = FetchType.LAZY)
-	private List<DetalleProforma> detalles;//detalles q contienen este elemento del catalogo
+	private List<DetalleFactura> detalles;//detalles q contienen este elemento del catalogo
 
 	
 	
@@ -81,10 +81,10 @@ public class ElementoCatalogo implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public List<DetalleProforma> getDetalles() {
+	public List<DetalleFactura> getDetalles() {
 		return detalles;
 	}
-	public void setDetalles(List<DetalleProforma> detalles) {
+	public void setDetalles(List<DetalleFactura> detalles) {
 		this.detalles = detalles;
 	}
 	

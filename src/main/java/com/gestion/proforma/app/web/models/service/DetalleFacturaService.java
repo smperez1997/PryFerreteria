@@ -6,24 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
  
-import com.gestion.proforma.app.web.models.dao.IDetalleProforma;
-import com.gestion.proforma.app.web.models.entities.DetalleProforma;
+import com.gestion.proforma.app.web.models.dao.IDetalleFactura;
+import com.gestion.proforma.app.web.models.entities.DetalleFactura;
 
 @Service
-public class DetalleProformaService implements IDetalleProformaService{
+public class DetalleFacturaService implements IDetalleFacturaService{
 
 	@Autowired
-	private IDetalleProforma dao;
+	private IDetalleFactura dao;
 	
 	@Override
 	@Transactional
-	public void save(DetalleProforma detalleProforma) {
+	public void save(DetalleFactura detalleProforma) {
 		dao.save(detalleProforma);
 	}
 
 	@Override
 	@Transactional
-	public DetalleProforma findById(Integer id) {
+	public DetalleFactura findById(Integer id) {
 		return dao.findById(id).get();
 	}
 
@@ -36,8 +36,8 @@ public class DetalleProformaService implements IDetalleProformaService{
 
 	@Override
 	@Transactional
-	public List<DetalleProforma> findAll() {
-		return (List<DetalleProforma>)dao.findAll();
+	public List<DetalleFactura> findAll() {
+		return (List<DetalleFactura>)dao.findAll();
 	}
 	
 }

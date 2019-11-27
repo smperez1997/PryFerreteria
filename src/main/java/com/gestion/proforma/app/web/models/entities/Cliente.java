@@ -59,21 +59,21 @@ public class Cliente implements Serializable {
 	@NotEmpty
 	private String celular;
 
-	@Size(max = 10)
+	@Size(max = 100)
 	@Column(name = "CORREO")
 	@NotEmpty
 	private String correo;
 
-	@Size(max = 10)
-	@Column(name = "DESCRIPCIÓN")
-	@NotEmpty
-	private String descripcion;
-	
 	@Column(name="FECHA_NACIMIENTO")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Past
 	private Calendar fechanacimiento;
+	
+	@Size(max = 250)
+	@Column(name = "DESCRIPCIÓN")
+	@NotEmpty
+	private String descripcion;
 
 	//relacion con proforma 0..n
 	@OneToMany(mappedBy="cliente",fetch= FetchType.LAZY)
