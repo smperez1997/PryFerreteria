@@ -2,15 +2,18 @@ package com.gestion.proforma.app.web.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+ 
 import com.gestion.proforma.app.web.models.entities.Cliente;
 import com.gestion.proforma.app.web.models.service.IClienteService;
 
@@ -24,8 +27,8 @@ public class ClienteController {
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		Cliente cliente = new Cliente();
-		model.addAttribute("cliente",cliente);
 		model.addAttribute("title","Registro del nuevo cliente");
+		model.addAttribute("cliente",cliente);
 		return "cliente/form";
 	}
 	
@@ -61,17 +64,20 @@ public class ClienteController {
 		return "/cliente/list";
 	}
 	
-	//
-	@PostMapping(value="/save")
-	public String save(Cliente cliente,Model model, RedirectAttributes redirect) {	
-		try {
-			service.save(cliente);
-			redirect.addFlashAttribute("success","Registro guardado");
-			
-		}catch(Exception e) {
-			redirect.addFlashAttribute("error","No se pudo guardar");
-		}
-		
-		return "/cliente/list";
-	}
+	  @PostMapping(value="/save")
+	    public String save(@Valid Cliente cliente, BindingResult result, Model model,
+	                       RedirectAttributes flash) {
+	        try {
+	            if(result.hasErrors()){
+	                model.addAttribute("tittle", "Error al Guardar");
+	                return "cliente/form";
+	            }
+	            service.save(cliente);
+	            flash.addFlashAttribute("success", "El registro fue guardado con éxito.");
+	        }
+	        catch(Exception ex) {
+	            flash.addFlashAttribute("error", "El registro no pudo ser guardado.");
+	        }
+	        return "redirect:/cliente/list";
+	    }
 }
