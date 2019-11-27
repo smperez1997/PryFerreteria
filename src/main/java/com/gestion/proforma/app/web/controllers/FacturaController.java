@@ -14,38 +14,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gestion.proforma.app.web.models.entities.Cliente;
-import com.gestion.proforma.app.web.models.service.IClienteService;
+import com.gestion.proforma.app.web.models.entities.Factura;
+import com.gestion.proforma.app.web.models.service.IFacturaService;
 
 @Controller
-@RequestMapping(value="/cliente")
-public class ClienteController {
+@RequestMapping(value="/factura")
+public class FacturaController {
 
 	@Autowired
-	private IClienteService service;
+	private IFacturaService service;
 	
 	@GetMapping(value="/create")
 	public String create(Model model) {
-		Cliente cliente = new Cliente();
-		model.addAttribute("title", "Registro de Cliente");
-		model.addAttribute("cliente", cliente);
-		return "cliente/form";		
+		Factura factura = new Factura();
+		model.addAttribute("title", "Registro de Facturas");
+		model.addAttribute("factura", factura);
+		return "factura/form";		
 	}
 	
 	@GetMapping(value="/retrieve/{id}")
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
-		Cliente cliente = service.findById(id);
-		model.addAttribute("cliente", cliente);
-		return "cliente/card";		
+		Factura factura = service.findById(id);
+		model.addAttribute("factura", factura);
+		return "factura/card";		
 	} 
 	
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
-		Cliente cliente = service.findById(id);
+		Factura factura = service.findById(id);
 		model.addAttribute("title", "Actualizando el registro de " 
-		+ cliente.getNombre());
-		model.addAttribute("cliente", cliente);
-		return "cliente/form";		
+		+ factura.getCodigo());
+		model.addAttribute("factura", factura);
+		return "factura/form";		
 	} 
 	
 	@GetMapping(value="/delete/{id}")
@@ -58,33 +58,33 @@ public class ClienteController {
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", "El registro no pudo ser eliminado.");
 		}
-		return "redirect:/cliente/list";		
+		return "redirect:/factura/list";		
 	} 
 	
 	@PostMapping(value="/save")
-	public String save(@Valid Cliente cliente,BindingResult result, Model model,
+	public String save(@Valid Factura factura,BindingResult result, Model model,
 			RedirectAttributes flash) {
 		try {
 			if(result.hasErrors())
 			{
 				model.addAttribute("tittle","Error al Guardar");
-				return"cliente/form";
+				return"factura/form";
 			}
-			service.save(cliente);
+			service.save(factura);
 			flash.addFlashAttribute("success", "El registro fue guardado con éxito.");
 		}
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", "El registro no pudo ser guardado.");
 		}
-		return "redirect:/cliente/list";		
+		return "redirect:/factura/list";		
 	} 
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
-		List<Cliente> lista = service.findAll();
-		model.addAttribute("title", "Listado de Clientes");
+		List<Factura> lista = service.findAll();
+		model.addAttribute("title", "Listado de Facturas");
 		model.addAttribute("lista", lista);
-		return "cliente/list";		
+		return "factura/list";		
 	} 
 	
 }

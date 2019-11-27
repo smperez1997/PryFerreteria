@@ -11,57 +11,77 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="DETALLEPROFORMA")
+@Table(name="DETALLEFACTURA")
 public class DetalleFactura implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name="ID")
-	private Integer iddetalleproforma;
-	 
-	@Column(name="CANTIDAD")
-	private Float cantidad; 
-	@Column(name="SUBTOTAL")
-	private Float subtotal;
-
 	
+	@Basic(optional = false)
+	@Column(name="IDDETALLEFACTURA")
+	private Integer iddetallefactura;
+	 
+	@Size(max = 50)
+	@Column(name="CANTIDAD")
+	@NotEmpty
+	private Integer cantidad; 
+	
+	@Size(max = 50)
+	@Column(name="VALORUNITARIO")
+	@NotEmpty
+	private Float valorunitario;
+
+	@Size(max = 50)
+	@Column(name="VALORTOTAL")
+	@NotEmpty
+	private Float valortotal;
+
 	//relacion de 1 a 1 con elementocatalogo
 	@JoinColumn(name = "IDELEMENTOCATALOGO", referencedColumnName = "ID")
 	@ManyToOne
 	private ElementoCatalogo elementocatalogo;
 	
 	//relacion con proforma 1 a 1
-	@JoinColumn(name = "IDPROFORMA", referencedColumnName = "ID")
+	@JoinColumn(name = "IDFACTURA", referencedColumnName = "IDFACTURA")
 	@ManyToOne
-	private Proforma proforma;
+	private Factura factura;
 	
+ 
 	public DetalleFactura() {
 		super();
 	}
 	public DetalleFactura(Integer id) {
 		super();
-		this.iddetalleproforma=id;
+		this.iddetallefactura=id;
 	}
-	public Integer getIddetalleproforma() {
-		return iddetalleproforma;
+	  
+	public Integer getIddetallefactura() {
+		return iddetallefactura;
 	}
-	public void setIddetalleproforma(Integer iddetalleproforma) {
-		this.iddetalleproforma = iddetalleproforma;
+	public void setIddetallefactura(Integer iddetallefactura) {
+		this.iddetallefactura = iddetallefactura;
 	}
-	public Float getCantidad() {
+	public Integer getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(Float cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Float getSubtotal() {
-		return subtotal;
+	public Float getValortotal() {
+		return valortotal;
 	}
-	public void setSubtotal(Float subtotal) {
-		this.subtotal = subtotal;
+	public void setValortotal(Float valortotal) {
+		this.valortotal = valortotal;
+	}
+	public Float getValorunitario() {
+		return valorunitario;
+	}
+	public void setValorunitario(Float valorunitario) {
+		this.valorunitario = valorunitario;
 	}
 	public ElementoCatalogo getElementocatalogo() {
 		return elementocatalogo;
@@ -69,12 +89,19 @@ public class DetalleFactura implements Serializable {
 	public void setElementocatalogo(ElementoCatalogo elementocatalogo) {
 		this.elementocatalogo = elementocatalogo;
 	}
-	public Proforma getProforma() {
-		return proforma;
+	public Factura getFactura() {
+		return factura;
 	}
-	public void setProforma(Proforma proforma) {
-		this.proforma = proforma;
-	} 
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
+	 
+//	public Producto getProducto() {
+//		return producto;
+//	}
+//	public void setProducto(Producto producto) {
+//		this.producto = producto;
+//	} 
 	
 	
 }

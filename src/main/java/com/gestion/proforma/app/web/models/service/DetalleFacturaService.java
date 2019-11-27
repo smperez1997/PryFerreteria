@@ -17,8 +17,8 @@ public class DetalleFacturaService implements IDetalleFacturaService{
 	
 	@Override
 	@Transactional
-	public void save(DetalleFactura detalleProforma) {
-		dao.save(detalleProforma);
+	public void save(DetalleFactura detallefactura) {
+		dao.save(detallefactura);
 	}
 
 	@Override

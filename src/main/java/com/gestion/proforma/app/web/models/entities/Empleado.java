@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -26,30 +27,45 @@ public class Empleado implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="ID")
-	private Integer id; 
+	private Integer idempleado; 
+	
 	@Column(name="NOMBRE")
+	@NotEmpty
 	private String nombre;
-	@Column(name="CORREO")
-	private String correo; 
+	
+	@Column(name="CEDULA")
+	@NotEmpty
+	private String cedula; 
+	
 	@Column(name="CELULAR")
+	@NotEmpty
 	private String celular;
 	
 	//relacion con proforma 0..n
 	@OneToMany(mappedBy="empleado",fetch= FetchType.LAZY)
-	private List<Proforma>proforma;
+	private List<Factura>proforma;
 	
+
+	public Empleado() {
+		super();
+	}
+	public Empleado(Integer id) {
+		super();
+		this.idempleado=id;
+	}
 	
-	public List<Proforma> getProforma() {
+	public List<Factura> getProforma() {
 		return proforma;
 	}
-	public void setProforma(List<Proforma> proforma) {
+	public void setProforma(List<Factura> proforma) {
 		this.proforma = proforma;
 	}
-	public Integer getId() {
-		return id;
+ 
+	public Integer getIdempleado() {
+		return idempleado;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdempleado(Integer idempleado) {
+		this.idempleado = idempleado;
 	}
 	public String getNombre() {
 		return nombre;
@@ -57,11 +73,12 @@ public class Empleado implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getCorreo() {
-		return correo;
+ 
+	public String getCedula() {
+		return cedula;
 	}
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 	public String getCelular() {
 		return celular;

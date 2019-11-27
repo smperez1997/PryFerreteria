@@ -16,43 +16,58 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="PROFORMA")
-public class Proforma implements Serializable {
+@Table(name="FACTURA")
+public class Factura implements Serializable {
 	private static final long serialVersionUID=1L;
  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="ID")
-	private Integer idproforma;
+	@Column(name="IDFACTURA")
+	private Integer idfactura;
+	
+	
+	@Size(max = 50)
+	@Column(name="CODIGO")
+	@NotEmpty
+	private String codigo; 
+	
 	
 	@Column(name="FECHA")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Past
+	@NotEmpty
 	private Calendar fecha;
 	
 	@Column(name="DESCRIPCIÓN")
 	@Size(max=300)
+	@NotEmpty
 	private String descripcion;
 	
 	@Column(name="ESTADO")
 	private Boolean estado;
+	
 	@Column(name="DIRECCIÓN")
 	@Size(max=300)
+	@NotEmpty
 	private String direccion;
 	
 	@Column(name="IVA")
-	@Size(max=5)
+	@Size(max=10)
+	@NotEmpty
 	private Float iva;
+	
 	@Column(name="TOTAL")
-	@Size(max=5)
+	@Size(max=50)
+	@NotEmpty
 	private Float total;
 	
 	//Relacion con cliente 1..1
@@ -67,24 +82,25 @@ public class Proforma implements Serializable {
 	private Empleado empleado;
 	
 	//relacion 1..n con detalle de proforma
-	@OneToMany(mappedBy = "proforma", fetch = FetchType.LAZY)
-	private List<DetalleFactura> detalles;//detalles q contienen este elemento del catalogo
+	@OneToMany(mappedBy = "factura", fetch = FetchType.LAZY)
+	private List<DetalleFactura> detallefactura;//detalles q contienen este elemento del catalogo
 
 		
 	
-	public Proforma() {
+	public Factura() {
 		super();
 	}
-	public Proforma(Integer id) {
+	public Factura(Integer id) {
 		super();
-		this.idproforma=id;
+		this.idfactura=id;
 	}
 	
-	public Integer getIdproforma() {
-		return idproforma;
+ 
+	public Integer getIdfactura() {
+		return idfactura;
 	}
-	public void setIdproforma(Integer idproforma) {
-		this.idproforma = idproforma;
+	public void setIdfactura(Integer idfactura) {
+		this.idfactura = idfactura;
 	}
 	public Cliente getCliente() {
 		return cliente;
@@ -135,11 +151,18 @@ public class Proforma implements Serializable {
 	public void setTotal(Float total) {
 		this.total = total;
 	}
-	public List<DetalleFactura> getDetalles() {
-		return detalles;
+	 
+	public List<DetalleFactura> getDetallefactura() {
+		return detallefactura;
 	}
-	public void setDetalles(List<DetalleFactura> detalles) {
-		this.detalles = detalles;
+	public void setDetallefactura(List<DetalleFactura> detallefactura) {
+		this.detallefactura = detallefactura;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

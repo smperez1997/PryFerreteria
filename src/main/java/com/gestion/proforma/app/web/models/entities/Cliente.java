@@ -77,7 +77,7 @@ public class Cliente implements Serializable {
 
 	//relacion con proforma 0..n
 	@OneToMany(mappedBy="cliente",fetch= FetchType.LAZY)
-	private List<Proforma>proforma;
+	private List<Factura>proforma;
 	 
 	public Cliente() {
 		super();
@@ -87,11 +87,11 @@ public class Cliente implements Serializable {
 		super();
 		this.id = id;
 	}
-	public List<Proforma> getProforma() {
+	public List<Factura> getProforma() {
 		return proforma;
 	}
 
-	public void setProforma(List<Proforma> proforma) {
+	public void setProforma(List<Factura> proforma) {
 		this.proforma = proforma;
 	}
 

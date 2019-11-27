@@ -1,20 +1,21 @@
-package com.gestion.proforma.app.web.controllers;
+package com.gestion.proforma.app.web.controllers; 
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gestion.proforma.app.web.models.entities.DetalleFactura;
 import com.gestion.proforma.app.web.models.service.IDetalleFacturaService;
- 
 
 @Controller
 @RequestMapping(value="/detallefactura")
@@ -25,55 +26,65 @@ public class DetalleFacturaController {
 	
 	@GetMapping(value="/create")
 	public String create(Model model) {
-		DetalleFactura detalleproforma = new DetalleFactura();
-		model.addAttribute("detallefactura",detalleproforma);
-		model.addAttribute("title","Registro del nuevo detalle de proforma");
-		return "detallefactura/form";
+		DetalleFactura detallefactura = new DetalleFactura();
+		model.addAttribute("title", "Registro de Detalle de Factura");
+		model.addAttribute("detallefactura", detallefactura);
+		return "detallefactura/form";		
 	}
 	
-	@GetMapping(value="/retrive/{id}")
-	public String retrive(@PathVariable(value="id") Integer id, Model model) {
+	@GetMapping(value="/retrieve/{id}")
+	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		DetalleFactura detallefactura = service.findById(id);
-		model.addAttribute("detalleproforma",detallefactura);
-		return "detallefactura/card";
-	}
+		model.addAttribute("detallefactura", detallefactura);
+		return "detallefactura/card";		
+	} 
 	
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
-		DetalleFactura detalleproforma = service.findById(id);
-		model.addAttribute("detalleproforma",detalleproforma);
-		return "detalleproforma/form";
-	}
+		DetalleFactura detallefactura = service.findById(id);
+		model.addAttribute("title", "Actualizando el registro de " 
+		+ detallefactura.getIddetallefactura());
+		model.addAttribute("detallefactura", detallefactura);
+		return "detallefactura/form";		
+	} 
 	
 	@GetMapping(value="/delete/{id}")
-	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes redirect) {
+	public String delete(@PathVariable(value="id") Integer id, Model model, 
+			RedirectAttributes flash) {
 		try {
 			service.delete(id);
-			redirect.addFlashAttribute("success", "El registro se eliminó exitosamente");
-		}catch(Exception e) {
-			redirect.addFlashAttribute("error", "No se pudo eliminar");
+			flash.addFlashAttribute("success", "El registro fue eliminado con éxito.");
+		}	
+		catch(Exception ex) {
+			flash.addFlashAttribute("error", "El registro no pudo ser eliminado.");
 		}
-		return "redirect:/detalleproforma/list";
-	}
+		return "redirect:/detallefactura/list";		
+	} 
+	
+	@PostMapping(value="/save")
+	public String save(@Valid DetalleFactura detallefactura,BindingResult result, Model model,
+			RedirectAttributes flash) {
+		try {
+			if(result.hasErrors())
+			{
+				model.addAttribute("tittle","Error al Guardar");
+				return"detallefactura/form";
+			}
+			service.save(detallefactura);
+			flash.addFlashAttribute("success", "El registro fue guardado con éxito.");
+		}
+		catch(Exception ex) {
+			flash.addFlashAttribute("error", "El registro no pudo ser guardado.");
+		}
+		return "redirect:/detallefactura/list";		
+	} 
+	
 	@GetMapping(value="/list")
 	public String list(Model model) {
-		List<DetalleFactura> list = service.findAll();
-		model.addAttribute("list",list);
-		model.addAttribute("title","Listado de tipos de detalle de proforma");
-		return "/detalleproforma/list";
-	}
+		List<DetalleFactura> lista = service.findAll();
+		model.addAttribute("title", "Listado de Detalles de Facturas");
+		model.addAttribute("lista", lista);
+		return "detallefactura/list";		
+	} 
 	
-	//
-	@PostMapping(value="/save")
-	public String save(DetalleFactura detalleproforma,Model model, RedirectAttributes redirect) {	
-		try {
-			service.save(detalleproforma);
-			redirect.addFlashAttribute("success","Registro guardado");
-			
-		}catch(Exception e) {
-			redirect.addFlashAttribute("error","No se pudo guardar");
-		}
-		
-		return "/detalleproforma/list";
-	}
 }
