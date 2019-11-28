@@ -43,7 +43,7 @@ public class Empleado implements Serializable{
 	
 	//relacion con proforma 0..n
 	@OneToMany(mappedBy="empleado",fetch= FetchType.LAZY)
-	private List<Factura>proforma;
+	private List<Factura>factura;
 	
 
 	public Empleado() {
@@ -53,14 +53,13 @@ public class Empleado implements Serializable{
 		super();
 		this.idempleado=id;
 	}
-	
-	public List<Factura> getProforma() {
-		return proforma;
+	 
+	public List<Factura> getFactura() {
+		return factura;
 	}
-	public void setProforma(List<Factura> proforma) {
-		this.proforma = proforma;
+	public void setFactura(List<Factura> factura) {
+		this.factura = factura;
 	}
- 
 	public Integer getIdempleado() {
 		return idempleado;
 	}
