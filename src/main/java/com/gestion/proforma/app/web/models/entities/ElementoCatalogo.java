@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import com.gestion.proforma.app.web.models.entities.DetalleFactura;
@@ -43,8 +45,17 @@ public class ElementoCatalogo implements Serializable {
 	@OneToMany(mappedBy = "elementocatalogo", fetch = FetchType.LAZY)
 	private List<DetalleFactura> detalles;//detalles q contienen este elemento del catalogo
 
+	@OneToOne   
+	@JoinColumn(name="IDPROVEEDOR",referencedColumnName="IDPROVEEDOR")
+	private Proveedor proveedor;
 	
 	
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
 	public Integer getIdcatalogo() {
 		return idcatalogo;
 	}
