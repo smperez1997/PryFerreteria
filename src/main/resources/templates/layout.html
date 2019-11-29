@@ -12,6 +12,14 @@
 <body>
 	<header th:fragment="frgHeader" class="container">
 		<br />
+		
+		<nav class="navbar navbar-expand-sm bg-warning navbar-dark">
+		
+		
+				<img class="card-img-top" th:src="@{/images/logo2.png}"  style="width:135px;height:130px;"/>
+<h1 style="font-size:300%;">FERRETERÍA ELECTRO PÉREZ</h1>
+ 	</nav>
+ 
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<a class="navbar-brand" th:href="@{/}">Inicio</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -50,6 +58,10 @@
 					</li>
  
 
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/proveedor/list}">Proveedor</a></li>
+						 
+					 
 				</ul>
 			</div>
 	</nav>
@@ -81,12 +93,23 @@
                   
 <i class="fas fa-hammer fa-5x"></i>
 
+
                 </div>
                 <div class="col-md-9">
-                    <h5 class="card-title">Universidad de las Fuerzas Armadas</h5>
+                    <h5 class="card-title">La Ferretería #1 del Cantón Machala</h5>
                     <div class="card-text">
-                        <strong>Carrera de ingeniería de Software</strong><br /> <small>Belisario
-                            Quevedo - Latacunga</small>
+                        <strong>Contactos</strong><br /> <small>Tnlgo Manuel P.
+                            +593 99 808 2015</small>
+                            <small>
+                             <br />
+                             Servicio al cliente     
+                             <br />
+                            +593 99 514 6253     
+                             <br />
+                            +593 97 906 4781
+                       
+                             
+                            </small>
                     </div>
                 </div>
                 <div class="col-md-1 center-block">

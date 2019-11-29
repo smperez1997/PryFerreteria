@@ -24,7 +24,7 @@ private static final long serialVersionUID = 1L;
 	private Integer idproveedor;
 	
 	@Column(name = "NOMBRE")
-	@Size(max=45)
+	@Size(max=50)
 	@NotEmpty
 	private String nombre;
 	
@@ -34,7 +34,7 @@ private static final long serialVersionUID = 1L;
 	private String direccion;
 	
 	@Column(name = "CIUDAD")
-	@Size(max=45)
+	@Size(max=100)
 	@NotEmpty
 	private String ciudad;
 	

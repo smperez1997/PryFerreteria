@@ -5,24 +5,28 @@
 
 	<header th:replace="layout :: header"></header>
 
-	<div class="container">
-		<br/>
-		<div class="content row">
-			<div class="col-md-6">
-				<div class="jumbotron">
-					<h1 class="display-4" th:text="${title}"></h1>
+	
+	<div class="container"> 
+		
+		  	<nav class="navbar navbar-expand-sm bg-white navbar-dark"> 
+				
+ 	</nav>
+ 	
+				 	 
+  <div class="jumbotron-background">
+  <div>
+    <img src="https://www.olanocorp.com/wp-content/uploads/2018/04/banner-001-1.jpg" style="width:1110px;height:500px;"> </div>
+  </div>
+  
+  
+
+  <div class="container text-white">  
+				  
 					<p class="lead" th:text="${framework}"></p>
 					<hr class="my-4">
-					<p th:text="${description}"></p>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<img class="card-img-top" th:src="@{/images/spring-boot.png}" />
-			</div>
-		</div>
-	</div>
-
-
+					 
+				</div> 
+		  
 
 	<footer th:replace="layout :: footer"></footer>
 </body>

@@ -43,7 +43,7 @@ public class DetalleFactura implements Serializable {
 	//relacion de 1 a 1 con elementocatalogo
 	@JoinColumn(name = "IDELEMENTOCATALOGO", referencedColumnName = "ID")
 	@ManyToOne
-	private ElementoCatalogo elementocatalogo;
+	private Producto elementocatalogo;
 	
 	//relacion con proforma 1 a 1
 	@JoinColumn(name = "IDFACTURA", referencedColumnName = "IDFACTURA")
@@ -83,10 +83,10 @@ public class DetalleFactura implements Serializable {
 	public void setValorunitario(Float valorunitario) {
 		this.valorunitario = valorunitario;
 	}
-	public ElementoCatalogo getElementocatalogo() {
+	public Producto getElementocatalogo() {
 		return elementocatalogo;
 	}
-	public void setElementocatalogo(ElementoCatalogo elementocatalogo) {
+	public void setElementocatalogo(Producto elementocatalogo) {
 		this.elementocatalogo = elementocatalogo;
 	}
 	public Factura getFactura() {

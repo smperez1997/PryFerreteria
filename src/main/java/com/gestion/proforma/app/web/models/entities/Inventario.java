@@ -34,13 +34,13 @@ private static final long serialVersionUID = 1L;
 	
 	@OneToOne   
 	@JoinColumn(name="ID",referencedColumnName="ID")
-	private ElementoCatalogo elementocatalogo;
+	private Producto elementocatalogo;
 	
-	public ElementoCatalogo getElementocatalogo() {
+	public Producto getElementocatalogo() {
 		return elementocatalogo;
 	}
 
-	public void setElementocatalogo(ElementoCatalogo elementocatalogo) {
+	public void setElementocatalogo(Producto elementocatalogo) {
 		this.elementocatalogo = elementocatalogo;
 	}
 
