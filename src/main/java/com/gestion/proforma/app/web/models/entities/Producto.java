@@ -14,8 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
  
 @Entity
@@ -45,9 +50,12 @@ public class Producto implements Serializable {
 	@Column(name = "IMAGEN")
 	@NotEmpty
 	private String imagen;
-	
+	 
+	@NotNull 
+    @Min(value = 0) 
+    @Max(value = 1000000000) 
 	@Column(name = "PRECIO")
-	@NotEmpty
+     
 	private Float precio;
 
 	@Size(max = 200)
