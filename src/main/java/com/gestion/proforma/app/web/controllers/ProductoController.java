@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gestion.proforma.app.web.models.entities.Producto;
+import com.gestion.proforma.app.web.models.entities.Proveedor;
 import com.gestion.proforma.app.web.models.service.IProductoService;
+import com.gestion.proforma.app.web.models.service.IProveedorService;
 
 @Controller
 @RequestMapping(value="/producto")
@@ -24,11 +26,15 @@ public class ProductoController {
 	@Autowired
 	private IProductoService service;
 	
+	@Autowired
+    private IProveedorService srvProveedor;
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		Producto producto = new Producto();
 		model.addAttribute("title", "Registro de Producto");
 		model.addAttribute("producto", producto);
+		List<Proveedor> proveedores = srvProveedor.findAll();
+        model.addAttribute("proveedores", proveedores);  
 		return "producto/form";		
 	}
 	
@@ -45,6 +51,8 @@ public class ProductoController {
 		model.addAttribute("title", "Actualizando el registro de " 
 		+ producto.getNombre());
 		model.addAttribute("producto", producto);
+		List<Proveedor> proveedores = srvProveedor.findAll();
+        model.addAttribute("proveedores", proveedores); 
 		return "producto/form";		
 	} 
 	

@@ -1,8 +1,6 @@
 package com.gestion.proforma.app.web.models.entities;
 
-import java.awt.Image;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -11,16 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
  
 @Entity
 @Table(name="PRODUCTO")
@@ -32,7 +28,7 @@ public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "ID")
+	@Column(name = "IDPRODUCTO")
 	private Integer idproducto;
 	
 	@Size(max = 100)
@@ -50,7 +46,6 @@ public class Producto implements Serializable {
 	@NotEmpty
 	private String imagen;
 	
-	@Size(max = 50)
 	@Column(name = "PRECIO")
 	@NotEmpty
 	private Float precio;
@@ -64,6 +59,18 @@ public class Producto implements Serializable {
 	@OneToMany(mappedBy="cliente",fetch= FetchType.LAZY)
 	private List<Factura>factura;
 	 
+	@OneToOne   
+	@JoinColumn(name="IDPROVEEDOR",referencedColumnName="IDPROVEEDOR")
+	private Proveedor proveedor;
+	
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
 	public List<Factura> getFactura() {
 		return factura;
 	}
