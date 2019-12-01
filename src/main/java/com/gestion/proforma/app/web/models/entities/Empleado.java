@@ -30,15 +30,15 @@ public class Empleado implements Serializable{
 	private Integer idempleado; 
 	
 	@Column(name="NOMBRE")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String nombre;
 	
 	@Column(name="CEDULA")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String cedula; 
 	
 	@Column(name="CELULAR")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String celular;
 	
 	//relacion con proforma 0..n

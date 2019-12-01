@@ -19,15 +19,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
+ 
  
 @Entity
 @Table(name="CLIENTE")
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
@@ -36,43 +37,45 @@ public class Cliente implements Serializable {
 	
 	@Size(max = 50)
 	@Column(name = "NOMBRE")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String nombre;
 
 	@Size(max = 50)
 	@Column(name = "APELLIDO")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String apellido;
 	
 	@Size(max = 10)
 	@Column(name = "CEDULA")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String cedula;
 	
 	@Size(max = 150)
 	@Column(name = "DIRECCIÓN")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String direccion;
 
 	@Size(max = 10)
 	@Column(name = "CELULAR")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String celular;
 
 	@Size(max = 100)
 	@Column(name = "CORREO")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String correo;
 
+		
 	@Column(name="FECHA_NACIMIENTO")
 	@Temporal(TemporalType.DATE)
+	@NotNull(message = "Este campo no puede quedar vacío") 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Past
 	private Calendar fechanacimiento;
 	
 	@Size(max = 250)
 	@Column(name = "DESCRIPCIÓN")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String descripcion;
 
 	//relacion con proforma 0..n

@@ -90,7 +90,7 @@ public class ProductoController {
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<Producto> lista = service.findAll();
-		model.addAttribute("title", "Listado de productos");
+		model.addAttribute("title", "Listado de Productos");
 		model.addAttribute("lista", lista);
 		return "producto/list";		
 	} 

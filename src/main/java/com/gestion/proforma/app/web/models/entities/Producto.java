@@ -14,13 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Min; 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
  
 @Entity
@@ -38,29 +37,29 @@ public class Producto implements Serializable {
 	
 	@Size(max = 100)
 	@Column(name = "NOMBRE")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String nombre;
 
 	@Size(max = 50)
 	@Column(name = "TIPO")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String tipo;
 	
 	@Size(max = 100)
 	@Column(name = "IMAGEN")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String imagen;
-	 
-	@NotNull 
-    @Min(value = 0) 
-    @Max(value = 1000000000) 
+
+	@NotNull(message = "Este campo no puede quedar vacío")  
+	@Min(value = 1, message = "El precio no puede ser inferior a 1 USD") 
+	@Max(value = 1000000000, message = "El precio no puede ser inferior a 1000000000 USD") 
+
 	@Column(name = "PRECIO")
-     
 	private Float precio;
 
 	@Size(max = 200)
 	@Column(name = "DESCRIPCION")
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String descripcion;
  
 	//relacion con proforma 0..n
@@ -69,6 +68,8 @@ public class Producto implements Serializable {
 	 
 	@OneToOne   
 	@JoinColumn(name="IDPROVEEDOR",referencedColumnName="IDPROVEEDOR")
+
+	
 	private Proveedor proveedor;
 	
 	public Proveedor getProveedor() {
