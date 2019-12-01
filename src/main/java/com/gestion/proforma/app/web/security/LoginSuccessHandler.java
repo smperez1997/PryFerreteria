@@ -1,4 +1,4 @@
-package com.gestion.proforma.app.web.security;
+package com.gestion.proforma.app.web.security; 
 
 import java.io.IOException;
 
@@ -13,22 +13,58 @@ import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
 
 @Component
-public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-@Override
-public void onAuthenticationSuccess(HttpServletRequest request,
-		HttpServletResponse response, Authentication authentication)
-		throws IOException, ServletException {
+public class LoginSuccessHandler 
+	extends SimpleUrlAuthenticationSuccessHandler {
 	
-	SessionFlashMapManager sessionFlashMapManager = new SessionFlashMapManager();
-	FlashMap flashMap = new FlashMap();
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request,
+			HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
 
-	flashMap.put("success", "Bienvenid@"+ authentication.getName());
-	sessionFlashMapManager.saveOutputFlashMap(flashMap, request, response);
-	if(authentication != null) {
-		logger.info("El usuario " + authentication.getName() + "ha iniciado sesión con éxito.");
+		SessionFlashMapManager sessionFlashMapManager = new SessionFlashMapManager();
+		FlashMap flashMap = new FlashMap();
+		flashMap.put("success", "Bienvenid@ " + authentication.getName());
+		sessionFlashMapManager.saveOutputFlashMap(flashMap, request, response);
+		if(authentication !=  null) {
+			logger.info("El usuario " + authentication.getName() 
+			+ " ha iniciado sesión con éxito");
+		}		
+		super.onAuthenticationSuccess(request, response, authentication);
+		
+		
 	}
-	super.onAuthenticationSuccess(request, response, authentication);
 	
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
