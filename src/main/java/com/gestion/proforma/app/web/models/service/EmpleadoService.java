@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
- 
 import com.gestion.proforma.app.web.models.dao.IEmpleado;
 import com.gestion.proforma.app.web.models.entities.Empleado;
 
@@ -39,5 +37,20 @@ public class EmpleadoService implements IEmpleadoService{
 	@Transactional
 	public List<Empleado> findAll() {
 		return (List<Empleado>)dao.findAll();
+	}
+
+	@Override
+	public List<Empleado> findByApellido(String filtro) {
+		try {
+			return dao.findByApellido(filtro);
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+	}
+
+	@Override
+	public Empleado findByCedula(String cedula) {		
+		return dao.findByCedula(cedula);
 	}
 }

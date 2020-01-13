@@ -16,12 +16,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+ 
 @Entity
 @Table(name="FACTURA")
 public class Factura implements Serializable {
@@ -70,21 +71,29 @@ public class Factura implements Serializable {
 	@NotEmpty
 	private Float total;
 	
-	//Relacion con cliente 1..1
-	@JoinColumn(name="IDCLIENTE",referencedColumnName="ID")
-	@ManyToOne
-	private Cliente cliente;
 	
+@JoinColumn(name = "IDPRODUCTO", referencedColumnName = "IDPRODUCTO")
+@ManyToOne	
+private Producto producto;
+ 
 	
 	//relacion con empleado 1..1
-	@JoinColumn(name="IDEMPLEADO",referencedColumnName="ID")
+	@JoinColumn(name="IDEMPLEADO",referencedColumnName="IDPERSONA")
 	@ManyToOne
 	private Empleado empleado;
 	
-	//relacion 1..n con detalle de proforma
-	@OneToMany(mappedBy = "factura", fetch = FetchType.LAZY)
-	private List<DetalleFactura> detallefactura;//detalles q contienen este elemento del catalogo
 
+	@Transient
+	private int personaid;
+	
+	
+	public int getPersonaid() {
+		return personaid;
+	}
+	public void setPersonaid(int personaid) {
+		this.personaid = personaid;
+	}
+	
 		
 	
 	public Factura() {
@@ -102,12 +111,7 @@ public class Factura implements Serializable {
 	public void setIdfactura(Integer idfactura) {
 		this.idfactura = idfactura;
 	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+ 
 	public Empleado getEmpleado() {
 		return empleado;
 	}
@@ -152,11 +156,12 @@ public class Factura implements Serializable {
 		this.total = total;
 	}
 	 
-	public List<DetalleFactura> getDetallefactura() {
-		return detallefactura;
+ 
+	public Producto getProducto() {
+		return producto;
 	}
-	public void setDetallefactura(List<DetalleFactura> detallefactura) {
-		this.detallefactura = detallefactura;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 	public String getCodigo() {
 		return codigo;

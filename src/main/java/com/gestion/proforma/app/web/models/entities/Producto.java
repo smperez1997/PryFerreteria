@@ -1,6 +1,7 @@
 package com.gestion.proforma.app.web.models.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -13,12 +14,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min; 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.validation.constraints.NotNull;
 
  
@@ -61,9 +67,25 @@ public class Producto implements Serializable {
 	@Column(name = "DESCRIPCION")
 	@NotEmpty(message = "Este campo no puede quedar vacío") 
 	private String descripcion;
+	
+	
+	//Bitácora
+	@Column(name="CREADOPOR")
+	@Size(max=35)
+	private String creadoPor;
+	
+	@Column(name="CREADOEN")
+	private Calendar creadoEn;
+	
+	@PrePersist
+	public void prePersist() {
+	    creadoEn = Calendar.getInstance();
+	    SecurityContext context = SecurityContextHolder.getContext();
+	    creadoPor = context.getAuthentication().getName();
+	}
  
 	//relacion con proforma 0..n
-	@OneToMany(mappedBy="cliente",fetch= FetchType.LAZY)
+	@OneToMany(mappedBy="producto",fetch= FetchType.LAZY)
 	private List<Factura>factura;
 	 
 	@OneToOne   
@@ -72,6 +94,22 @@ public class Producto implements Serializable {
 	
 	private Proveedor proveedor;
 	
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
+	public Calendar getCreadoEn() {
+		return creadoEn;
+	}
+
+	public void setCreadoEn(Calendar creadoEn) {
+		this.creadoEn = creadoEn;
+	}
+
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
