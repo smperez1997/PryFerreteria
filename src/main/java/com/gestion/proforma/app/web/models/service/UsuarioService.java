@@ -49,6 +49,11 @@ public class UsuarioService implements UserDetailsService {
 		dao.save(usuario);		
 	} 
 	
+	@Transactional	
+	public List<Usuario> findAll(){		
+		return (List<Usuario>) dao.findAll();
+	}
+	
 }
 
 

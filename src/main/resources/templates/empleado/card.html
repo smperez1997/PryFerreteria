@@ -2,62 +2,131 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout :: frgHead"></head>
 <body>
-<div id="wrapper">
 	<header th:replace="layout :: frgHeader"></header>
-	<div id="content-wrapper" class="d-flex flex-column">
-		<!-- Begin Page Content -->
-		<div>
-			<div class="container-fluid">
-				<br />
 
-		<div class="card col-md-12">
-			<div class="card-body">
-				<div class="form-group row">
-					<div class="content col-sm-1">
-						<i class="fas fa-info-circle"></i>
-					</div>
-					<h3 class="card-title col-sm-6"
-						th:text="${empleado.nombre}"></h3>
-					<div class="col-sm-4">
-						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-						<i class="fas fa-info-circle"></i>&nbsp;Eliminar</button>
-						<a class="btn btn-primary" th:href="@{/empleado/list}"><i
-							class="fas fa-arrow-left"></i>&nbsp;Volver</a>
+	<div class="whole-wrap">
+		<div class="container box_1170">
+			<div class="section-top-border">
+				<div class="welcome_docmed_area">
+					<div class="row">
+						<!-- Form de paciente con ID -->
+						<form th:object="${empleado}">
+							<input type="hidden" th:field="*{idpersona}" />
+						</form>
+						<div class="col-xl-12 col-lg-12">
+							<div class="welcome_docmed_info">
+								<h2 th:text="${title}"></h2>
+								<h3 th:text=${empleado}></h3>
+								<div class="business_expert_area">
+									<div class="business_tabs_area">
+										<div class="container">
+											<div class="row">
+												<div class="col-xl-12">
+													<ul class="nav" id="myTab" role="tablist">
+														<li class="nav-item active show"><a class="nav-link active show"
+															id="home-tab" data-toggle="tab" href="#home" role="tab"
+															aria-controls="home" aria-selected="true">Antecedentes</a></li>
+
+														<li class="nav-item"><a class="nav-link"
+															id="profile-tab" data-toggle="tab" href="#profile"
+															role="tab" aria-controls="profile" aria-selected="false">Estilo
+																de vida</a></li>
+
+
+														<li class="nav-item"><a class="nav-link"
+															id="contact-tab" data-toggle="tab" href="#contact"
+															role="tab" aria-controls="contact" aria-selected="false">Contactos
+																de emergencia</a></li>
+													</ul>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<div class="container">
+										<div class="border_bottom">
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade active show" id="home"
+													role="tabpanel" aria-labelledby="home-tab">
+													<div class="row align-items-center">
+														<div class="col-xl-2 col-md-2">
+															<div class="business_info">
+																<div class="icon">
+																	<i class="flaticon-electrocardiogram"></i>
+																</div>
+															</div>
+														</div>
+														<div class="col-xl-10 col-md-10">
+															<span>Registro del historial m&eacute;dico
+																referente a antecedentes patol&oacute;gicos personales y
+																familiares, adem&aacute;s de antecedentes
+																quir&uacute;rgicos del paciente.&nbsp;&nbsp;&nbsp;<a
+																class="genric-btn success circle small" title="Agregar" id="btnAgregarAntecedente"> <i
+																	class="fas fa-plus"></i>
+															</a>
+															</span>
+														</div>
+													</div>
+													<br />
+													<!-- Lista de antecedentes -->
+													<div class="container" id="ctnAntecedentePatologicoPersonal">
+													</div>
+												</div>
+												<div class="tab-pane fade" id="profile" role="tabpanel"
+													aria-labelledby="profile-tab">
+													<div class="row align-items-center">
+														<div class="col-xl-2 col-md-2">
+															<div class="business_info">
+																<div class="icon">
+																	<i class="flaticon-first-aid-kit"></i>
+																</div>
+															</div>
+														</div>
+														<div class="col-xl-10 col-md-10">
+															<span>H&aacute;bitos toxicol&oacute;gicos y estilo
+																de vida.
+																<a th:href="@{/factura/create/} + ${empleado.idpersona}"
+																class="genric-btn success circle small" title="Examen sanguineo"> 
+																	<i class="fas fa-vials"></i>
+															</a>
+																</span>
+														</div>
+													</div>
+													<!-- Lista de habitos -->
+												</div>
+												<div class="tab-pane fade" id="contact" role="tabpanel"
+													aria-labelledby="contact-tab">
+													<div class="row align-items-center">
+														<div class="col-xl-2 col-md-2">
+															<div class="business_info">
+																<div class="icon">
+																	<i class="flaticon-emergency-call"></i>
+																</div>
+															</div>
+														</div>
+														<div class="col-xl-10 col-md-10">
+															<span>Contactos registrados en caso de emergencia.</span>
+														</div>
+													</div>
+													<!-- Lista de habitos -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+							</div>
+
+
+						</div>
 					</div>
 				</div>
-				<input type="hidden" id="idempleado"
-					th:value="${empleado.idempleado}" />
-				<hr />
-				
 			</div>
-		</div>
-		<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">¿Desea eliminar el empleado?</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p th:text=${empleado.nombre}></p>
-					</div>
-					<div class="modal-footer">						
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<a th:href="@{/empleado/delete/} + ${empleado.idempleado}" class="btn btn-success">Confirmar</a>
-					</div>
-				</div>
-			</div>
-		</div>
-			</div>
-			
 		</div>
 	</div>
-</div>
-
-<footer th:replace="layout :: footer"></footer>
-	<div th:replace="layout :: scripts"></div>
+	<footer th:replace="layout :: frgFooter"></footer>
+	<script th:src="@{/js/paciente-card.js}"></script>
 </body>
 </html>

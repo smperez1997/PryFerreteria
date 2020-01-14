@@ -1,4 +1,4 @@
-package com.gestion.proforma.app.web.models.entities; 
+package com.gestion.proforma.app.web.models.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;

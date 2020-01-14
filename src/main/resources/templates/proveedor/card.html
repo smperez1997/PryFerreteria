@@ -6,7 +6,7 @@
 	<header th:replace="layout :: frgHeader"></header>
 	<div id="content-wrapper" class="d-flex flex-column">
 		<!-- Begin Page Content -->
-		<div >
+		<div class="container">
 			<div class="container-fluid">
 				<br />
 
@@ -21,7 +21,7 @@
 					<div class="col-sm-4">
 						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
 						<i class="fas fa-info-circle"></i>&nbsp;Eliminar</button>
-						<a class="btn btn-primary" th:href="@{/empleado/list}"><i
+						<a class="btn btn-primary" th:href="@{/proveedor/list}"><i
 							class="fas fa-arrow-left"></i>&nbsp;Volver</a>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">¿Desea eliminar el proveedor?</h5>
+						<h5 class="modal-title">¿Desea eliminar la region?</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -51,11 +51,10 @@
 				</div>
 			</div>
 		</div>
-			</div> 
+			</div>
+			<footer th:replace="layout :: frgFooter"></footer>
 		</div>
 	</div>
 </div>
-<footer th:replace="layout :: footer"></footer>
-	<div th:replace="layout :: scripts"></div>
 </body>
 </html>

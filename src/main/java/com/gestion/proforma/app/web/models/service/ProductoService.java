@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+ 
 import com.gestion.proforma.app.web.models.dao.IProducto;
 import com.gestion.proforma.app.web.models.entities.Producto;
 
@@ -38,5 +39,6 @@ public class ProductoService implements IProductoService{
 	public List<Producto> findAll() {
 		return (List<Producto>)dao.findAll();
 	}
-	
+
+ 
 }

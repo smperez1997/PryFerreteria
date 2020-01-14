@@ -1,4 +1,4 @@
-package com.gestion.proforma.app.web.controllers;  
+package com.gestion.proforma.app.web.controllers; 
 
 import java.util.List;
 
@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+ 
 import com.gestion.proforma.app.web.models.entities.Producto;
 import com.gestion.proforma.app.web.models.entities.Proveedor;
 import com.gestion.proforma.app.web.models.service.IProductoService;
@@ -76,8 +77,6 @@ public class ProductoController {
 			if(result.hasErrors())
 			{
 				model.addAttribute("tittle","Error al Guardar");
-				List<Proveedor> proveedores = srvProveedor.findAll();
-		        model.addAttribute("proveedores", proveedores);
 				return"producto/form";
 			}
 			service.save(producto);
@@ -88,6 +87,13 @@ public class ProductoController {
 		}
 		return "redirect:/producto/list";		
 	} 
+	@GetMapping(value="/search")
+	public String search(Model model) {
+		model.addAttribute("title", "Búsqueda por apellidos");		
+		return "producto/search";		
+	}
+ 
+	
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
