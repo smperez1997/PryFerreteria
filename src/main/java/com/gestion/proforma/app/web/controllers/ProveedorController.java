@@ -27,7 +27,7 @@ public class ProveedorController {
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		Proveedor proveedor = new Proveedor();
-		model.addAttribute("title", "Registro de un nuevo Proveedor");
+		model.addAttribute("title", "Registro de un nuevo proveedor");
 		model.addAttribute("proveedor", proveedor);
 		return "proveedor/form";		
 	}
@@ -68,7 +68,7 @@ public class ProveedorController {
 			if(result.hasErrors())
 			{
 				if(proveedor.getIdproveedor() == null) {
-					model.addAttribute("tittle","Registro de un nuevo Proveedor");					
+					model.addAttribute("tittle","Registro de un nuevo proveedor");					
 				}
 				else {
 					model.addAttribute("tittle","Actualizando el registro de " 
@@ -89,7 +89,7 @@ public class ProveedorController {
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<Proveedor> lista = service.findAll();
-		model.addAttribute("title", "Listado de Proveedores");
+		model.addAttribute("title", "Listado de proveedores");
 		model.addAttribute("lista", lista);
 		return "proveedor/list";		
 	}

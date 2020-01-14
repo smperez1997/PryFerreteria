@@ -154,7 +154,7 @@
     margin-top: 10px;
 }
 .slicknav_menu .slicknav_icon-bar {
-    background-color: #000;
+    background-color: #ffffff;
     height: 3px;
     margin: 5px 0;
     -webkit-transition: all 0.3s ease 0s;
@@ -192,7 +192,7 @@
   padding: 0;
 }
 .slicknav_icon-bar {
-    background: #000 !important;
+    background: #212121 !important;
 }
 .slicknav_nav {
 	background: #fff;
@@ -240,7 +240,6 @@
   padding: 5px;
   right: 5px;
   margin-top: -5px;
-  top: -36px;
 }
 .slicknav_menu .slicknav_icon {
 	margin-right: 6px;

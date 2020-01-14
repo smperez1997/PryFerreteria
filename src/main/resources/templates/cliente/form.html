@@ -4,12 +4,16 @@
 <body>
 <div id="wrapper">
 	<header th:replace="layout :: frgHeader"></header>
-	<div id="content-wrapper" class="d-flex flex-column">
+ 
 		<!-- Begin Page Content -->
-		<div class="container">
-			<div class="container-fluid">			
+ 
 				<br />
-		<div class="card col-md-12">
+		<div class="row">
+			<div class = "col-md-4"> 
+			
+			</div>
+			<div class = "col-md-8">
+			<div class="card col-md-12">
 			<div class="card-body">
 				<div class="form-group row">
 					<div class="content col-sm-1">
@@ -142,13 +146,13 @@
 							<label class="h5 col-form-label">&nbsp;Fecha de nacimiento:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<input class="form-control" type="text" 
+							<input class="form-control" type="date" 
 								th:field="*{fechanacimiento}"
 								th:errorclass="'form-control is-invalid'" />
 							<small class="invalid-feedback"
 								th:if="${#fields.hasErrors('fechanacimiento')}"
 								th:errors="*{fechanacimiento}"></small>										
-
+	<br>	<br>	<br>	<br>	<br>
 						</div>
 					</div>
 					
@@ -173,9 +177,10 @@
 			</div>
 		</div>
 			</div>
-			<footer th:replace="layout :: frgFooter"></footer>
 		</div>
-	</div>
-</div>
+		
+		
+			<footer th:replace="layout :: footer"></footer>
+	<div th:replace="layout :: scripts"></div>
 </body>
 </html>
