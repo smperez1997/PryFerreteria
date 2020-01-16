@@ -33,10 +33,16 @@ private static final long serialVersionUID = 1L;
 	private Integer cantidad_disponible;
 	
 	@OneToOne   
-	@JoinColumn(name="IDPRODUCTO",referencedColumnName="IDPRODUCTO")
-	private Producto producto;
+	@JoinColumn(name="ID",referencedColumnName="ID")
+	private Producto elementocatalogo;
 	
-	
+	public Producto getElementocatalogo() {
+		return elementocatalogo;
+	}
+
+	public void setElementocatalogo(Producto elementocatalogo) {
+		this.elementocatalogo = elementocatalogo;
+	}
 
 	public Inventario() {
 		super();
